@@ -1,0 +1,12 @@
+export(read.rflp,
+       RFLPqc,
+       RFLPdist,
+       RFLPdist2,
+       RFLPplot,
+       RFLPdist2ref,
+       RFLPrefplot,
+       nrBands,
+       read.blast,
+       simMatrix,
+       sim2dist,
+       write.hclust)

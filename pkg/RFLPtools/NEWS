@@ -1,0 +1,18 @@
+###############################################################################
+## NEWS to package RFLPtools
+###############################################################################
+
+###########################################################
+## Version 1.0
+###########################################################
+- start of implementation, first version on CRAN
+
+###########################################################
+## Version 1.1
+###########################################################
+- added NEWS file
+- some examples simplyfied to reduce check-time
+- added warnings for BLAST datasets for the case that there are subject.ids 
+  which do not occur as query.ids
+- extended vignette and package Rd-file by RFLPplot and RFLPrefplot examples
+

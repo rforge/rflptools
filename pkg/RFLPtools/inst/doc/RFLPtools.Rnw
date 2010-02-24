@@ -1,0 +1,246 @@
+%\VignetteIndexEntry{RFLPtools}
+%\VignetteDepends{stats, lattice, MKmisc, RColorBrewer}
+%\VignetteKeywords{RFLPtools}
+%\VignettePackage{RFLPtools}
+%
+\documentclass[11pt]{article}
+\usepackage{geometry}\usepackage{color}
+\definecolor{darkblue}{rgb}{0.0,0.0,0.75}
+\usepackage[%
+pdftitle={RFLPtools},%
+pdfauthor={F. Flessa, A. Kehl and M. Kohl},%
+pdfsubject={RFLPtools},%
+pdfkeywords={RFLPtools, RFLP, BLAST},%
+pagebackref,bookmarks,colorlinks,linkcolor=darkblue,citecolor=darkblue,%
+pagecolor=darkblue,raiselinks,plainpages,pdftex]{hyperref}
+%
+\markboth{\sl Package ``{\tt RFLPtools}''}{\sl Package ``{\tt RFLPtools}''}
+%
+% -------------------------------------------------------------------------------
+\newcommand{\code}[1]{{\tt #1}}
+\newcommand{\pkg}[1]{{\tt "#1"}}
+\newcommand{\myinfig}[2]{%
+%  \begin{figure}[htbp]
+    \begin{center}
+      \includegraphics[width = #1\textwidth]{#2}
+%      \caption{\label{#1}#3}
+    \end{center}
+%  \end{figure}
+}
+% -------------------------------------------------------------------------------
+%
+% -------------------------------------------------------------------------------
+\begin{document}
+\SweaveOpts{keep.source = TRUE, eval = TRUE, include = FALSE}
+%-------------------------------------------------------------------------------
+\title{RFLPtools: Analysis of DNA fragment samples and standalone BLAST report files}
+%-------------------------------------------------------------------------------
+\author{F. Flessa, A. Kehl and M. Kohl\\ \\
+\includegraphics[width = 3cm]{logoUBT.png}
+}
+\maketitle
+\tableofcontents
+%-------------------------------------------------------------------------------
+\section{Introduction}
+%-------------------------------------------------------------------------------
+The package \pkg{RFLPtools} aims at 
+\begin{itemize}
+\item the detection of similar band patterns based on DNA fingerprint fragment 
+sizes (i.e. derived from RFLP-analysis)
+\item the analysis of standalone BLAST report files (i.e. DNA sequence analysis)
+\end{itemize}
+In this short vignette we describe and demonstrate the available functions.
+<<load>>=
+library(RFLPtools)
+@
+%-------------------------------------------------------------------------------
+\section{RFLP data}
+%-------------------------------------------------------------------------------
+We load example data and compute the Euclidean distance ...
+<<eucl>>=
+data(RFLPdata)
+res <- RFLPdist(RFLPdata)
+names(res) ## number of bands
+str(res$"6")
+@
+Of course, we can also use other well-known distances ...
+<<other>>=
+res1 <- RFLPdist(RFLPdata, distfun = function(x) dist(x, method = "manhattan"))
+res2 <- RFLPdist(RFLPdata, distfun = function(x) dist(x, method = "maximum"))
+str(res[[1]])
+str(res1[[1]])
+str(res2[[1]])
+@
+Correlation distances
+<<cor>>=
+library(MKmisc)
+res3 <- RFLPdist(RFLPdata, distfun = corDist)
+str(res3$"9")
+@
+As we obtain a list of \code{dist} objects we can easily perform hierarchical 
+clustering ...
+<<hclust, fig = TRUE>>=
+par(mfrow = c(2,2))
+plot(hclust(res[[1]]), main = "Euclidean distance")
+plot(hclust(res1[[1]]), main = "Manhattan distance")
+plot(hclust(res2[[1]]), main = "Maximum distance")
+plot(hclust(res3[[1]]), main = "Pearson correlation distance")
+@
+\myinfig{1}{RFLPtools-hclust.pdf}
+We easily can apply other functions ...
+<<cutree>>=
+clust4bd <- hclust(res[[2]])
+cgroups50 <- cutree(clust4bd, h=50)
+cgroups50
+@
+Another possibility to display the similarity of the samples are so-called 
+(dis-)similarity matrices ...
+<<sim1, fig = TRUE>>=
+library(RColorBrewer)
+library(MKmisc)
+myCol <- colorRampPalette(brewer.pal(8, "RdYlGn"))(128)
+ord <- order.dendrogram(as.dendrogram(hclust(res[[1]])))
+temp <- as.matrix(res[[1]])
+corPlot(temp[ord,ord], col = rev(myCol), minCor = 0, 
+        labels = colnames(temp), title = "(Dis-)Similarity Plot")
+@
+\myinfig{1}{RFLPtools-sim1.pdf}
+<<sim2, fig = TRUE>>=
+library(lattice)
+print(levelplot(temp[ord,ord], col.regions = rev(myCol),
+          at = do.breaks(c(0, max(temp)), 128),
+          xlab = "", ylab = "",
+          ## Rotate labels of x-axis
+          scales = list(x = list(rot = 90)),
+          main = "(Dis-)Similarity Plot"))
+@
+\myinfig{1}{RFLPtools-sim2.pdf}
+Some bands may be missing ...
+<<sim3>>=
+## Euclidean distance
+data(RFLPdata)
+data(RFLPref)
+nrBands(RFLPdata)
+res0 <- RFLPdist2(RFLPdata, nrBands = 9, nrMissing = 0)
+res1 <- RFLPdist2(RFLPdata, nrBands = 9, nrMissing = 1)
+res2 <- RFLPdist2(RFLPdata, nrBands = 9, nrMissing = 2)
+res3 <- RFLPdist2(RFLPdata, nrBands = 9, nrMissing = 3)
+@
+<<sim4, fig = TRUE>>=
+## hierarchical clustering
+par(mfrow = c(2,2))
+plot(hclust(res0), main = "0 bands missing")
+plot(hclust(res1), main = "1 band missing")
+plot(hclust(res2), main = "2 bands missing")
+plot(hclust(res3), main = "3 bands missing")
+@
+\myinfig{1}{RFLPtools-sim4.pdf}
+Another possible visualization ...
+<<RFLPplot, fig = TRUE>>=
+par(mfrow = c(1,2))
+plot(hclust(RFLPdist(RFLPdata, nrBands = 3)), cex = 0.7)
+RFLPplot(RFLPdata, nrBands = 3, mar.bottom = 6, cex.axis = 0.8)
+@
+\myinfig{1}{RFLPtools-RFLPplot.pdf}
+Comparison to reference data ...
+<<RFLPrefplot, fig = TRUE>>=
+RFLPrefplot(RFLPdata, RFLPref, nrBands = 9, cex.axis = 0.8)
+@
+\myinfig{1}{RFLPtools-RFLPrefplot.pdf}
+%-------------------------------------------------------------------------------
+\section{BLAST data} 
+%-------------------------------------------------------------------------------
+To analyze tabular report files generated with standalone BLAST from NCBI 
+(cf.\ \url{ftp://ftp.ncbi.nlm.nih.gov/blast/executables/release}), 
+a function for reading the BLAST report files is included (\code{read.blast}).  
+<<read.blast>>=
+Dir <- system.file("extdata", package = "RFLPtools") # input directory 
+filename <- file.path(Dir, "BLASTexample.txt")
+BLAST1 <- read.blast(file = filename)
+str(BLAST1)
+@
+This example BLAST data is also available as loadable example data.
+<<blast>>=
+data(BLASTdata)
+@
+The loaded \code{data.frame} can be used to compute similarities between the 
+BLASTed sequences via function \code{simMatrix}. This function includes the following 
+steps:
+\begin{enumerate}
+\item the length of each sequence ({\tt LS}) comprised in the input data file is extracted.
+\item if there is more than one comparison for one sequence including different parts of 
+the respective sequence, that one with maximum base length is chosen.
+\item the number of matching bases ({\tt mB}) is calculated by multiplying two variables 
+given in the BLAST output: the identity between sequences (\%) and the number of nucleotides 
+divided by 100. 
+\item the resulting value is rounded to the next integer. 
+\item the similarity is calculated by dividing {\tt mB} by {\tt LS} and saved in the
+corresponding similarity matrix. 
+\end{enumerate}
+If the similarity of a combination is not shown in the BLAST report file (because 
+the similarity was lower than 70\%), this comparison is included in the similarity 
+matrix with the result zero.
+<<simMatrix, eval = FALSE>>=
+res <- simMatrix(BLASTdata)
+@
+Optionally, the range of sequence length can be specified 
+to exclude sequences which were too short or too long, respectively.
+<<blast1>>=
+res1 <- simMatrix(BLASTdata, sequence.range = TRUE, Min = 100, Max = 450)
+res2 <- simMatrix(BLASTdata, sequence.range = TRUE, Min = 500)
+@
+We visualize the similarity matrix ...
+<<blast2, fig = TRUE>>=
+library(MKmisc)
+corPlot(res2, col = myCol, minCor = 0, cex.axis = 0.5,
+        labels = colnames(res2), title = "(Dis-)Similarity Plot")
+@
+\myinfig{1}{RFLPtools-blast2.pdf}
+Alternatively, ...
+<<blast3>>=
+library(lattice)
+txt <- trellis.par.get("add.text")
+txt$cex <- 0.5
+trellis.par.set("add.text" = txt)
+myCol <- colorRampPalette(brewer.pal(8, "RdYlGn"))(128)
+@
+<<blast31, fig = TRUE>>=
+print(levelplot(res2, col.regions = myCol,
+          at = do.breaks(c(0, max(res2)), 128),
+          xlab = "", ylab = "", 
+          ## Rotate labels of x axis
+          scales = list(x = list(rot = 90)),
+          main = "(Dis-)Similarity Plot"))
+@
+\myinfig{1}{RFLPtools-blast31.pdf}
+We can also convert the similarity matrix to an object of S3 class \code{"dist"}.
+<<blast4>>=
+res.d <- sim2dist(res2)
+@
+After the conversion we can for instance perform hierarchical clustering ...
+<<blast5, fig = TRUE>>=
+## hierarchical clustering
+plot(hclust(res.d), cex = 0.7)
+@
+\myinfig{1}{RFLPtools-blast5.pdf}
+%-------------------------------------------------------------------------------
+\begin{thebibliography}{1}
+
+  \bibitem{Poussier00}
+  Poussier, Stephane; Trigalet-Demery, Danielle; Vandewalle, Peggy; Goffinet, Bruno; 
+  Luisetti, Jacques; Trigalet, Andre.
+  \newblock Genetic diversity of Ralstonia solanacearum as assessed by PCR-RFLP of 
+  the hrp gene region, AFLP and 16S rRNA sequence analysis, and identification of 
+  an African subdivision.
+  \newblock Microbiology 2000 146:1679-1692 
+  
+  \bibitem{Matsumoto96}
+  Matsumoto, Masaru; Furuya, Naruto; Takanami, Yoichi; Matsuyama, Nobuaki.  
+  \newblock RFLP analysis of the PCR-amplified 28S rDNA in Rhizoctonia solani. 
+  \newblock Mycoscience 1996 37:351 - 356
+
+\end{thebibliography}
+%-------------------------------------------------------------------------------
+\end{document}
+
+
