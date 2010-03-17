@@ -9,7 +9,8 @@
 }
 \usage{
 RFLPplot(x, nrBands, nrMissing, distfun = dist, 
-         hclust.method = "complete", mar.bottom = 5, cex.axis = 0.5)
+         hclust.method = "complete", mar.bottom = 5, 
+         cex.axis = 0.5, colBands)
 }
 \arguments{
   \item{x}{ data.frame with RFLP data; see \code{\link{RFLPdata}}.}
@@ -24,6 +25,9 @@ RFLPplot(x, nrBands, nrMissing, distfun = dist,
   see \code{\link[stats]{hclust}}.}
   \item{mar.bottom}{ bottom margin of the plot; see \code{\link[graphics]{par}}. }
   \item{cex.axis}{ size of the x-axis annotation. }
+  \item{colBands}{ color for the bands. Has to be of length 1 or number of samples. 
+  If missing, \code{"Set1"} of \pkg{RColorBrewer} is used; see
+  \code{\link[RColorBrewer]{brewer.pal}}. }
 }
 \details{
   RFLP data is plotted. The samples are sorted according to the corresponding

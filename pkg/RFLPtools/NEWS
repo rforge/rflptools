@@ -16,3 +16,8 @@
   which do not occur as query.ids
 - extended vignette and package Rd-file by RFLPplot and RFLPrefplot examples
 
+###########################################################
+## Version 1.2
+###########################################################
+- RFLPplot and RFLPrefplot gained argument "colBands" to specify color(s) for 
+  the plotted bands.

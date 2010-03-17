@@ -4,8 +4,10 @@
 
 ## x: data.frame with RFLP data
 ## distfun: function to compute distance (cf. ?dist)
-RFLPplot <- function(x, nrBands, nrMissing, distfun = dist, hclust.method = "complete", 
-                     mar.bottom = 5, cex.axis = 0.5){
+RFLPplot <- function(x, nrBands, nrMissing, distfun = dist, 
+		     hclust.method = "complete", 
+                     mar.bottom = 5, cex.axis = 0.5,
+		     colBands){
     stopifnot(is.data.frame(x))
     stopifnot(is.function(dist))
     if(missing(nrBands))
@@ -54,11 +56,21 @@ RFLPplot <- function(x, nrBands, nrMissing, distfun = dist, hclust.method = "com
         }
     }
     rm(temp1)
-    if(length(temp) <= 9){
-        mycol <- brewer.pal(max(3, length(temp)), "Set1")
+    if(missing(colBands)){
+	if(length(temp) <= 9){
+	    mycol <- brewer.pal(max(3, length(temp)), "Set1")
+	}else{
+	    mycol1 <- brewer.pal(9, "Set1")
+	    mycol <- colorRampPalette(mycol1)(length(temp))
+	}
     }else{
-        mycol1 <- brewer.pal(9, "Set1")
-        mycol <- colorRampPalette(mycol1)(length(temp))
+	if((length(colBands) != 1) && (length(colBands) != length(temp)))
+	    stop("Length of 'colBands' is", length(colBands), "and should be 1 or", length(temp))
+	if(length(colBands) == 1){ 
+	    mycol <- rep(colBands, length(temp))
+        }else{
+            mycol <- colBands
+        }
     }
 
     temp.o <- temp[dend.ord]

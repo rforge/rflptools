@@ -9,7 +9,8 @@
 }
 \usage{
 RFLPrefplot(x, ref, distfun = dist, nrBands, mar.bottom = 5, 
-            cex.main = 1.2, cex.axis = 0.5, devNew = FALSE)
+            cex.main = 1.2, cex.axis = 0.5, devNew = FALSE, 
+            colBands)
 }
 \arguments{
   \item{x}{ data.frame with RFLP data; e.g. \code{\link{RFLPdata}}.}
@@ -22,6 +23,9 @@ RFLPrefplot(x, ref, distfun = dist, nrBands, mar.bottom = 5,
   \item{cex.main}{ size of the plot title. }
   \item{cex.axis}{ size of the x-axis annotation. }
   \item{devNew}{ logical. Open new graphics device for each plot. }
+  \item{colBands}{ color for the bands. Has to be of length 1 or number of samples. 
+  If missing, \code{"Set1"} of \pkg{RColorBrewer} is used; see
+  \code{\link[RColorBrewer]{brewer.pal}}. }
 }
 \details{
   Given RFLP samples are plotted together with reference samples and

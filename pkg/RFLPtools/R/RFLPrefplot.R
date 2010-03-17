@@ -5,7 +5,8 @@
 ## x: data.frame with RFLP data
 ## distfun: function to compute distance (cf. ?dist)
 RFLPrefplot <- function(x, ref, distfun = dist, nrBands, mar.bottom = 5, 
-                        cex.main = 1.2, cex.axis = 0.5, devNew = FALSE){
+                        cex.main = 1.2, cex.axis = 0.5, devNew = FALSE,
+                        colBands){
     res <- RFLPdist2ref(x, ref, distfun, nrBands)
         
     x1 <- split(x, x$Sample)
@@ -47,11 +48,21 @@ RFLPrefplot <- function(x, ref, distfun = dist, nrBands, mar.bottom = 5,
         abline(h = temp.mw, col = "black", lty = 1)
         box()
         title(paste("Reference sample:", colnames(res)[i]), cex.main = cex.main)
-        if(length(temp) <= 9){
-            mycol <- brewer.pal(max(3, length(temp)), "Set1")
+        if(missing(colBands)){
+            if(length(temp) <= 9){
+                mycol <- brewer.pal(max(3, length(temp)), "Set1")
+            }else{
+                mycol1 <- brewer.pal(9, "Set1")
+                mycol <- colorRampPalette(mycol1)(length(temp))
+            }
         }else{
-            mycol1 <- brewer.pal(9, "Set1")
-            mycol <- colorRampPalette(mycol1)(length(temp))
+            if((length(colBands) != 1) && (length(colBands) != length(temp)))
+                stop("Length of 'colBands' is", length(colBands), "and should be 1 or", length(temp))
+            if(length(colBands) == 1){ 
+                mycol <- rep(colBands, length(temp))
+            }else{
+                mycol <- colBands
+            }
         }
 
         matlines(rbind(rep(0.75, reps), rep(1.25, reps)), 
