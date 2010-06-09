@@ -81,13 +81,11 @@ plot(hclust(res3[[1]]), main = "Pearson correlation distance")
 
 
 ## Similarity matrix
-library(RColorBrewer)
 library(MKmisc)
-
 myCol <- colorRampPalette(brewer.pal(8, "RdYlGn"))(128)
 ord <- order.dendrogram(as.dendrogram(hclust(res[[1]])))
 temp <- as.matrix(res[[1]])
-corPlot(temp[ord,ord], col = rev(myCol), minCor = 0, 
+simPlot(temp[ord,ord], col = rev(myCol), minVal = 0, 
         labels = colnames(temp), title = "(Dis-)Similarity Plot")
 
 

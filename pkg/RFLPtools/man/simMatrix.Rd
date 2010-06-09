@@ -39,6 +39,10 @@ simMatrix(x, sequence.range = FALSE, Min, Max)
   Blast News: http://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&PAGE_TYPE=BlastNews
   
   BioEdit v7.0.9: Tom Hall, Ibis Biosciences; http://www.mbio.ncsu.edu/BioEdit/bioedit.html
+
+  Persoh, D., Melcher, M., Flessa, F., Rambold, G.: 
+  First fungal community analyses of endophytic ascomycetes associated with Viscum album ssp. austriacum 
+  and itshost Pinus sylvestris. Fungal Biology 2010, in press.
 }
 \author{ 
   Fabienne Flessa \email{Fabienne.Flessa@uni-bayreuth.de},\cr

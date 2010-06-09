@@ -15,9 +15,9 @@ Tools to analyse RFLP-data
 \tabular{ll}{
 Package: \tab RFLPtools\cr
 Version: \tab 1.2 \cr
-Date: \tab 2010-03-17 \cr
+Date: \tab 2010-06-09 \cr
 Depends: \tab R(>= 2.10.0), stats, utils, grDevices, RColorBrewer\cr
-Suggests: \tab lattice, MKmisc\cr
+Suggests: \tab lattice, MKmisc(>= 0.8)\cr
 License: \tab LGPL-3\cr
 }}
 
@@ -43,6 +43,10 @@ License: \tab LGPL-3\cr
   Matsumoto, Masaru; Furuya, Naruto; Takanami, Yoichi; Matsuyama, Nobuaki.  
   RFLP analysis of the PCR-amplified 28S rDNA in Rhizoctonia solani. 
   Mycoscience 1996 37:351 - 356
+
+  Persoh, D., Melcher, M., Flessa, F., Rambold, G.: 
+  First fungal community analyses of endophytic ascomycetes associated with Viscum album ssp. austriacum 
+  and itshost Pinus sylvestris. Fungal Biology 2010, in press.
 }
 \examples{
 data(RFLPdata)
@@ -57,12 +61,11 @@ data(RFLPref)
 RFLPrefplot(RFLPdata, RFLPref, nrBands = 6, cex.axis = 0.8)
 
 
+library(MKmisc)
 data(BLASTdata)
 res <- simMatrix(BLASTdata, sequence.range = TRUE, Min = 500)
-library(RColorBrewer)
-library(MKmisc)
 myCol <- colorRampPalette(brewer.pal(8, "RdYlGn"))(128)
-corPlot(res, col = myCol, minCor = 0, 
+simPlot(res, col = myCol, minVal = 0, 
         labels = colnames(res), title = "(Dis-)Similarity Plot")
 }
 \keyword{package}

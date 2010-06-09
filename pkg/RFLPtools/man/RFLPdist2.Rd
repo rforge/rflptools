@@ -71,13 +71,11 @@ plot(hclust(res2), main = "2 bands missing")
 plot(hclust(res3), main = "3 bands missing")
 
 ## Similarity matrix
-library(RColorBrewer)
 library(MKmisc)
-
 myCol <- colorRampPalette(brewer.pal(8, "RdYlGn"))(128)
 ord <- order.dendrogram(as.dendrogram(hclust(res1)))
 temp <- as.matrix(res1)
-corPlot(temp[ord,ord], col = rev(myCol), minCor = 0, 
+simPlot(temp[ord,ord], col = rev(myCol), minVal = 0, 
         labels = colnames(temp), title = "(Dis-)Similarity Plot")
 
 
@@ -94,7 +92,6 @@ levelplot(temp[ord,ord], col.regions = rev(myCol),
 ## Other distances
 res11 <- RFLPdist2(RFLPdata, distfun = function(x) dist(x, method = "manhattan"),
                  nrBands = 9, nrMissing = 1)
-library(MKmisc)
 res12 <- RFLPdist2(RFLPdata, distfun = corDist, nrBands = 9, nrMissing = 1)
 res1
 res11

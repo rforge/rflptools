@@ -35,8 +35,14 @@ pagecolor=darkblue,raiselinks,plainpages,pdftex]{hyperref}
 %-------------------------------------------------------------------------------
 \title{RFLPtools: Analysis of DNA fragment samples and standalone BLAST report files}
 %-------------------------------------------------------------------------------
-\author{F. Flessa, A. Kehl and M. Kohl\\ \\
+\author{F. Flessa\thanks{Chair for Plant Systematics, Section Mycology, 
+University of Bayreuth, 95440 Bayreuth, Germany, Fabienne.Flessa@uni-bayreuth.de}, 
+A. Kehl\thanks{Chair for Plant Systematics, Section Mycology, 
+University of Bayreuth, 95440 Bayreuth, Germany, Alexandra.Kehl@uni-bayreuth.de} and 
+M. Kohl\thanks{Department of Anesthesiology and Intensive Care Medicine, 
+Friedrich-Schiller-University Jena, 07747 Jena, Germany, Matthias.Kohl@stamats.de}\\ \\
 \includegraphics[width = 3cm]{logoUBT.png}
+\includegraphics[width = 3cm]{PaulMartini.png}
 }
 \maketitle
 \tableofcontents
@@ -101,7 +107,7 @@ library(MKmisc)
 myCol <- colorRampPalette(brewer.pal(8, "RdYlGn"))(128)
 ord <- order.dendrogram(as.dendrogram(hclust(res[[1]])))
 temp <- as.matrix(res[[1]])
-corPlot(temp[ord,ord], col = rev(myCol), minCor = 0, 
+simPlot(temp[ord,ord], col = rev(myCol), minVal = 0, 
         labels = colnames(temp), title = "(Dis-)Similarity Plot")
 @
 \myinfig{1}{RFLPtools-sim1.pdf}
@@ -192,7 +198,7 @@ res2 <- simMatrix(BLASTdata, sequence.range = TRUE, Min = 500)
 We visualize the similarity matrix ...
 <<blast2, fig = TRUE>>=
 library(MKmisc)
-corPlot(res2, col = myCol, minCor = 0, cex.axis = 0.5,
+simPlot(res2, col = myCol, minVal = 0, cex.axis = 0.5,
         labels = colnames(res2), title = "(Dis-)Similarity Plot")
 @
 \myinfig{1}{RFLPtools-blast2.pdf}

@@ -21,3 +21,6 @@
 ###########################################################
 - RFLPplot and RFLPrefplot gained argument "colBands" to specify color(s) for 
   the plotted bands.
+- added reference to recent article
+- in examples now use of simPlot instead of corPlot, hence requires package
+  MKmisc version 0.8
