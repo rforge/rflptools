@@ -1,8 +1,8 @@
 Package: RFLPtools
 Type: Package
 Title: Tools to analyse RFLP data
-Version: 1.2
-Date: 2010-06-09
+Version: 1.3
+Date: 2010-06-14
 Author: Fabienne Flessa, Alexandra Kehl, Matthias Kohl
 Maintainer: Matthias Kohl <Matthias.Kohl@stamats.de>
 Description: RFLPtools provides functions to analyse DNA fragment samples 

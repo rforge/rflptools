@@ -24,3 +24,8 @@
 - added reference to recent article
 - in examples now use of simPlot instead of corPlot, hence requires package
   MKmisc version 0.8
+
+###########################################################
+## Version 1.3
+###########################################################
+- added function diffDist
