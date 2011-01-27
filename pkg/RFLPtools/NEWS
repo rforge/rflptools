@@ -3,9 +3,25 @@
 ###############################################################################
 
 ###########################################################
-## Version 1.0
+## Version 1.4
 ###########################################################
-- start of implementation, first version on CRAN
+- correction of some minor bugs
+- added function linCombDist to compute a linear combination of distances
+  
+###########################################################
+## Version 1.3
+###########################################################
+- added function diffDist for distance matrix computation based on
+  successive differences
+  
+###########################################################
+## Version 1.2
+###########################################################
+- RFLPplot and RFLPrefplot gained argument "colBands" to specify color(s) for 
+  the plotted bands.
+- added reference to recent article
+- in examples now use of simPlot instead of corPlot, hence requires package
+  MKmisc version 0.8
 
 ###########################################################
 ## Version 1.1
@@ -17,16 +33,6 @@
 - extended vignette and package Rd-file by RFLPplot and RFLPrefplot examples
 
 ###########################################################
-## Version 1.2
+## Version 1.0
 ###########################################################
-- RFLPplot and RFLPrefplot gained argument "colBands" to specify color(s) for 
-  the plotted bands.
-- added reference to recent article
-- in examples now use of simPlot instead of corPlot, hence requires package
-  MKmisc version 0.8
-
-###########################################################
-## Version 1.3
-###########################################################
-- added function diffDist for distance matrix computation based on
-  successive differences
+- start of implementation, first version on CRAN

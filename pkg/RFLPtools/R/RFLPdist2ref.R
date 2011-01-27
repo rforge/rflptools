@@ -8,7 +8,7 @@
 RFLPdist2ref <- function(x, ref, distfun = dist, nrBands){
     stopifnot(is.data.frame(x))
     stopifnot(is.data.frame(ref))
-    stopifnot(is.function(dist))
+    stopifnot(is.function(distfun))
     
     if(missing(nrBands))
         stop("Number of Bands 'nrBands' is missing.")

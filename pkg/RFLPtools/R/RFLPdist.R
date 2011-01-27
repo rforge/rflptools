@@ -6,7 +6,8 @@
 ## distfun: function to compute distance (cf. ?dist)
 RFLPdist <- function(x, distfun = dist, nrBands){
     stopifnot(is.data.frame(x))
-    stopifnot(is.function(dist))
+    stopifnot(is.function(distfun))
+
     x1 <- split(x, x$Sample)
     nrbands <- sort(unique(sapply(x1, nrow)))
     x1.bands <- sapply(x1, nrow)

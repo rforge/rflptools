@@ -16,6 +16,8 @@ nrBands <- function(x){
 ## compares samples with number of bands in: nrBands, nrBands + 1, ..., nrBands + nrMissing
 RFLPdist2 <- function(x, distfun = dist, nrBands, nrMissing, diag = FALSE, upper = FALSE){
     stopifnot(is.data.frame(x))
+    stopifnot(is.function(distfun))
+
     x1 <- split(x, x$Sample)
     nrbands <- sort(unique(sapply(x1, nrow)))
     x1.bands <- sapply(x1, nrow)
@@ -31,7 +33,7 @@ RFLPdist2 <- function(x, distfun = dist, nrBands, nrMissing, diag = FALSE, upper
     d <- matrix(NA, nrow = N, ncol = N)
     dfun <- function(x, y){
         m <- sum(!is.na(x))
-        min(as.matrix(dist(rbind(x[1:m], t(combn(y, m)))))[-1,1])
+        min(as.matrix(distfun(rbind(x[1:m], t(combn(y, m)))))[-1,1])
     }
     for(i in 1:N){
         for(j in 1:i){

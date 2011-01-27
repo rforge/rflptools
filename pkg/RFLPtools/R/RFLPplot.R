@@ -9,7 +9,8 @@ RFLPplot <- function(x, nrBands, nrMissing, distfun = dist,
                      mar.bottom = 5, cex.axis = 0.5,
 		     colBands){
     stopifnot(is.data.frame(x))
-    stopifnot(is.function(dist))
+    stopifnot(is.function(distfun))
+    
     if(missing(nrBands))
         stop("Number of Bands 'nrBands' is missing.")
         

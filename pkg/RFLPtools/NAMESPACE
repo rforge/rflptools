@@ -1,5 +1,6 @@
 export(read.rflp,
        diffDist,
+       linCombDist,
        RFLPqc,
        RFLPdist,
        RFLPdist2,
