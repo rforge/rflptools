@@ -14,8 +14,8 @@ Tools to analyse RFLP-data
 \details{
 \tabular{ll}{
 Package: \tab RFLPtools\cr
-Version: \tab 1.3 \cr
-Date: \tab 2010-07-20 \cr
+Version: \tab 1.4 \cr
+Date: \tab 2012-10-23 \cr
 Depends: \tab R(>= 2.10.0), stats, utils, grDevices, RColorBrewer\cr
 Suggests: \tab lattice, MKmisc(>= 0.8)\cr
 License: \tab LGPL-3\cr
@@ -24,7 +24,7 @@ License: \tab LGPL-3\cr
 
 \author{
   Fabienne Flessa \email{Fabienne.Flessa@uni-bayreuth.de},\cr
-  Alexandra Kehl \email{Alexandra.Kehl@uni-bayreuth.de},\cr
+  Alexandra Kehl \email{Alexandra.Kehl@botgarten.uni-tuebingen.de},\cr
   Matthias Kohl \email{Matthias.Kohl@stamats.de}\cr
 
 \emph{Maintainer:} Matthias Kohl \email{Matthias.Kohl@stamats.de}
@@ -46,7 +46,7 @@ License: \tab LGPL-3\cr
 
   Persoh, D., Melcher, M., Flessa, F., Rambold, G.: 
   First fungal community analyses of endophytic ascomycetes associated with Viscum album ssp. austriacum 
-  and itshost Pinus sylvestris. Fungal Biology 2010, in press.
+  and itshost Pinus sylvestris. Fungal Biology 2010 Jul;114(7):585-96.
 }
 \examples{
 data(RFLPdata)

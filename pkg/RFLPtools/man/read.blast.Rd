@@ -7,17 +7,30 @@
   Function to read BLAST data generated with standalone BLAST from NCBI.
 }
 \usage{
-read.blast(file)
+read.blast(file, sep = "\t")
 }
 \arguments{
   \item{file}{ character: BLAST file to read in.}
+  \item{sep}{ the field separator character. Values on each line of the file are 
+  separated by this character. Default \code{"\t"}.}
 }
 \details{
-  The function reads data which was generated with standalone BLAST from NCBI.
-  Pairwise similarities of DNA sequences are calculated among all sequences 
-  to analyse applying Standalone Blast
-  (cf. ftp://ftp.ncbi.nih.gov/blast/executables/release/) 
-  with the parameters -m 8 -r 2 -G 5 -E 2.
+  The function reads data which was generated with standalone BLAST from NCBI;
+  see ftp://ftp.ncbi.nih.gov/blast/executables/release/.
+  
+  Possible steps:\cr
+  1) Install NCBI BLAST\cr
+  2) Generate and import database(s)\cr
+  3) Apply BLAST with options \code{outfmt} and \code{out}; e.g.\cr
+  \code{blastn -query Testquery -db Testdatabase -outfmt 6 -out out.txt}\cr
+  or\cr
+  \code{blastn -query Testquery -db Testdatabase -outfmt 10 -out out.csv}\cr
+  One can also call BLAST from inside R by using function \code{system}\cr
+  system("blastn -query Testquery -db Testdatabase -outfmt 6 -out out.txt")\cr
+  4) Read in the results\cr
+  \code{test.res <- read.blast(file = "out.txt")}\cr
+  or\cr
+  \code{test.res <- read.blast(file = "out.csv", sep = ",")}
 }
 \value{
   A \code{data.frame} with variables
@@ -43,7 +56,7 @@ read.blast(file)
 }
 \author{ 
   Fabienne Flessa \email{Fabienne.Flessa@uni-bayreuth.de},\cr
-  Alexandra Kehl \email{Alexandra.Kehl@uni-bayreuth.de},\cr
+  Alexandra Kehl \email{Alexandra.Kehl@botgarten.uni-tuebingen.de},\cr
   Matthias Kohl \email{Matthias.Kohl@stamats.de} 
 }
 %\note{}

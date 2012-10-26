@@ -7,6 +7,10 @@
 ###########################################################
 - correction of some minor bugs
 - added function linCombDist to compute a linear combination of distances
+- introduced vignettes folder
+- updated affiliations in vignette and added some explanations regarding the 
+  use of NCBI BLAST
+- added option "sep" to function "read.blast".
   
 ###########################################################
 ## Version 1.3

@@ -40,7 +40,7 @@ RFLPplot(x, nrBands, nrMissing, distfun = dist,
 %\references{ ??? }
 \author{ 
   Fabienne Flessa \email{Fabienne.Flessa@uni-bayreuth.de},\cr
-  Alexandra Kehl \email{Alexandra.Kehl@uni-bayreuth.de},\cr
+  Alexandra Kehl \email{Alexandra.Kehl@botgarten.uni-tuebingen.de},\cr
   Matthias Kohl \email{Matthias.Kohl@stamats.de} 
 }
 %\note{}
