@@ -19,7 +19,6 @@ RFLPdist2 <- function(x, distfun = dist, nrBands, nrMissing, diag = FALSE, upper
     stopifnot(is.function(distfun))
 
     x1 <- split(x, x$Sample)
-    nrbands <- sort(unique(sapply(x1, nrow)))
     x1.bands <- sapply(x1, nrow)
 
     temp <- do.call("rbind", x1[x1.bands %in% c(nrBands:(nrBands+nrMissing))])

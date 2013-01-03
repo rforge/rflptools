@@ -34,7 +34,7 @@ RFLPqc(x, rm.band1 = TRUE, QC.lo = 0.8, QC.up = 1.07, QC.rm = FALSE)
   If \code{rm.band1 = TRUE} band 1 of all samples is removed and the remaining band 
   numbers are reduced by 1. 
   
-  If \code{QC.rm = TRUE} samples with insufficient quality are entirely removed from the 
+  If \code{QC.rm = TRUE} samples of insufficient quality are entirely removed from the 
   given data and the resulting \code{data.frame} is returned.
 }
 \value{

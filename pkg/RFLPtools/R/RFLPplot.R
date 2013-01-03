@@ -15,7 +15,6 @@ RFLPplot <- function(x, nrBands, nrMissing, distfun = dist,
         stop("Number of Bands 'nrBands' is missing.")
         
     x1 <- split(x, x$Sample)
-    nrbands <- sort(unique(sapply(x1, nrow)))
     x1.bands <- sapply(x1, nrow)
 
     if(missing(nrMissing)){
