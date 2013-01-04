@@ -66,7 +66,28 @@ library(RFLPtools)
 %-------------------------------------------------------------------------------
 \section{RFLP data}
 %-------------------------------------------------------------------------------
-We load example data and compute the Euclidean distance ...
+As a first step we can perform a QC of the samples using function \code{RFLPqc}.
+This is possible if the first band corresponds to the total length of the fragment.
+The QC consists of a comparison of the length of the first band with the sum of 
+the lengths of the remaining bands for each sample. If the sum is smaller than 
+\code{QC.lo} times the length of the first band or larger than \code{QC.up} times 
+the length of the first band, respectively, a text message is printed.
+<<RFLPqc>>=
+Dir <- system.file("extdata", package = "RFLPtools") # input directory 
+filename <- file.path(Dir, "AZ091016_report.txt")
+RFLP1 <- read.rflp(file = filename)
+str(RFLP1)
+
+RFLP2 <- RFLPqc(RFLP1, rm.band1 = FALSE) # identical to RFLP1
+identical(RFLP1, RFLP2)
+
+RFLP3 <- RFLPqc(RFLP1)
+str(RFLP3)
+
+RFLP4 <- RFLPqc(RFLP1, rm.band1 = TRUE, QC.rm = TRUE)
+str(RFLP4)
+@
+We load some example data and compute the Euclidean distance ...
 <<eucl>>=
 data(RFLPdata)
 res <- RFLPdist(RFLPdata)
@@ -137,7 +158,7 @@ number of missing bands we expect.
 data(RFLPdata)
 data(RFLPref)
 nrBands(RFLPdata)
-res0 <- RFLPdist2(RFLPdata, nrBands = 9, nrMissing = 0)
+res0 <- RFLPdist(RFLPdata, nrBands = 9)
 res1 <- RFLPdist2(RFLPdata, nrBands = 9, nrMissing = 1)
 res2 <- RFLPdist2(RFLPdata, nrBands = 9, nrMissing = 2)
 res3 <- RFLPdist2(RFLPdata, nrBands = 9, nrMissing = 3)
@@ -151,13 +172,31 @@ plot(hclust(res2), main = "2 bands missing")
 plot(hclust(res3), main = "3 bands missing")
 @
 \myinfig{1}{RFLPtools-sim4.pdf}
-In function \code{RFLPplot} we have also implemented another possibility for visualization.
-<<RFLPplot, fig = TRUE>>=
-par(mfrow = c(1,2))
-plot(hclust(RFLPdist(RFLPdata, nrBands = 3)), cex = 0.7)
-RFLPplot(RFLPdata, nrBands = 3, mar.bottom = 6, cex.axis = 0.8)
+There are also ways to handle low-bp bands which are likely to be absent in some
+of the samples. First, one can use function \code{RFLPlod} to remove all bands 
+below a given threshold \code{LOD} before further analyses. For displaying the
+data we use function \code{RFLPplot}.
+<<RFLPlod, fig = TRUE>>=
+RFLPdata.lod <- RFLPlod(RFLPdata, LOD = 60)
+par(mfrow = c(1, 2))
+RFLPplot(RFLPdata, nrBands = 4, ylim = c(40, 670))
+RFLPplot(RFLPdata.lod, nrBands = 4, ylim = c(40, 670))
+title(sub = "After applying RFLPlod")
 @
-\myinfig{1}{RFLPtools-RFLPplot.pdf}
+\myinfig{1}{RFLPtools-RFLPlod.pdf}
+In addition, one can specify \code{LOD} in a call to function \code{RFLPdist2}. 
+If \code{LOD} is specified, it is assumed that missing bands only occur for 
+molecular weights smaller than \code{LOD}.
+<<sim5, fig = TRUE>>=
+res0 <- RFLPdist(RFLPdata, nrBands = 4)
+res1.lod <- RFLPdist2(RFLPdata, nrBands = 4, nrMissing = 1, LOD = 60)
+ord <- order.dendrogram(as.dendrogram(hclust(res1.lod)))
+temp <- as.matrix(res1.lod)
+simPlot(temp[ord,ord], col = rev(myCol), minVal = 0, 
+        labels = colnames(temp), 
+        title = "(Dis-)Similarity Plot\n1 band missing below LOD")
+@
+\myinfig{1}{RFLPtools-sim5.pdf}
 We can also make a comparison to reference data.
 <<RFLPrefplot, fig = TRUE>>=
 RFLPrefplot(RFLPdata, RFLPref, nrBands = 9, cex.axis = 0.8)

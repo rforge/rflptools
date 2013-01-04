@@ -10,7 +10,8 @@
 \usage{
 RFLPplot(x, nrBands, nrMissing, distfun = dist, 
          hclust.method = "complete", mar.bottom = 5, 
-         cex.axis = 0.5, colBands)
+         cex.axis = 0.5, colBands, xlab = "", 
+         ylab = "molecular weight", ylim, \dots)
 }
 \arguments{
   \item{x}{ data.frame with RFLP data; see \code{\link{RFLPdata}}.}
@@ -28,6 +29,12 @@ RFLPplot(x, nrBands, nrMissing, distfun = dist,
   \item{colBands}{ color for the bands. Has to be of length 1 or number of samples. 
   If missing, \code{"Set1"} of \pkg{RColorBrewer} is used; see
   \code{\link[RColorBrewer]{brewer.pal}}. }
+  \item{xlab}{ passed to function \code{\link[graphics]{plot}}. }
+  \item{ylab}{ passed to function \code{\link[graphics]{plot}}. }
+  \item{ylim}{ passed to function \code{\link[graphics]{plot}}. If missing an appropriate
+  range of y-values is computed. }
+  \item{\dots}{ additional arguments passed to function \code{\link[graphics]{plot}}
+  except \code{xlim} which is defined inside of \code{RFLPplot}. }
 }
 \details{
   RFLP data is plotted. The samples are sorted according to the corresponding

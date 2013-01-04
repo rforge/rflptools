@@ -6,7 +6,8 @@
 ## distfun: function to compute distance (cf. ?dist)
 RFLPrefplot <- function(x, ref, distfun = dist, nrBands, mar.bottom = 5, 
                         cex.main = 1.2, cex.axis = 0.5, devNew = FALSE,
-                        colBands){
+                        colBands, xlab = "", ylab = "molecular weight", 
+                        ylim, ...){
     res <- RFLPdist2ref(x, ref, distfun, nrBands)
         
     x1 <- split(x, x$Sample)
@@ -20,10 +21,13 @@ RFLPrefplot <- function(x, ref, distfun = dist, nrBands, mar.bottom = 5,
     ref.temp1 <- do.call("rbind", ref.temp)
     
     par(mar = c(mar.bottom, 4, 4, 2) + 0.1)
-    lo <- 10*trunc(min(temp1$MW, ref.temp1$MW)/10)
-    up <- 10*ceiling(max(temp1$MW, ref.temp1$MW)/10)
-    if(up-lo < 1) up <- up + 1
-    At <- round(seq(lo, up, length = 11), 0)
+    if(missing(ylim)){
+        lo <- 10*trunc(min(temp1$MW, ref.temp1$MW)/10)
+        up <- 10*ceiling(max(temp1$MW, ref.temp1$MW)/10)
+        if(up-lo < 1) up <- up + 1
+        ylim <- c(lo, up)
+    }
+    At <- round(seq(ylim[1], ylim[2], length = 11), 0)
     
     grp1 <- paste(ref.temp1[, "Taxonname"], " (", ref.temp1[, "Accession"], ")", sep = "")
     if(devNew){
@@ -74,8 +78,8 @@ RFLPrefplot <- function(x, ref, distfun = dist, nrBands, mar.bottom = 5,
             temp.mw <- temp.o[[i]]$MW
             reps <- length(temp.mw)
             matlines(rbind(rep(i+2-0.25, reps), rep(i+2+0.25, reps)), 
-                    rbind(temp.mw, temp.mw), 
-                    lwd = 3, lty = 1, col = mycol[i])
+                     rbind(temp.mw, temp.mw), 
+                     lwd = 3, lty = 1, col = mycol[i])
         }
     }
     invisible()

@@ -5,7 +5,12 @@
 ###########################################################
 ## Version 1.5
 ###########################################################
+- update of vignette
+- extension of function RFLPdist2: additional option that missing bands
+  occur only below a specified LOD
 - new function RFLPcombine to combine RFLP datasets
+- new function RFLPlod to remove bands below a given limit LOD
+- more flexible arguments for functions RFLPplot and RFLPrefplot
 
 
 ###########################################################

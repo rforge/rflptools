@@ -13,7 +13,7 @@
   argument \code{nrMissing}.
 }
 \usage{
-RFLPdist2(x, distfun = dist, nrBands, nrMissing, 
+RFLPdist2(x, distfun = dist, nrBands, nrMissing, LOD,
           diag = FALSE, upper = FALSE)
 }
 \arguments{
@@ -22,6 +22,7 @@ RFLPdist2(x, distfun = dist, nrBands, nrMissing,
   cf. \code{\link[stats]{dist}}.}
   \item{nrBands}{ samples with number of bands equal to \code{nrBands} are to be considered.}
   \item{nrMissing}{ number of bands that might be missing.}
+  \item{LOD}{ threshold for low-bp bands. }
   \item{diag}{ see \code{\link[stats]{dist}} }
   \item{upper}{ see \code{\link[stats]{dist}} }
 }
@@ -30,11 +31,19 @@ RFLPdist2(x, distfun = dist, nrBands, nrMissing,
   is computed. It is assumed that a number of bands might be missing. Hence
   all samples with number of bands in nrBands, nrBands+1, ..., nrBands+nrMissing
   are compared. 
+
+  If \code{LOD} is specified, it is assumed that missing bands can only occur for
+  molecular weights smaller than \code{LOD}. As a consequence only samples which 
+  have \code{nrBands} bands with molecular weight larger or equal to \code{LOD} are
+  selected.
   
   For computing the distance between the molecular weight of a sample S1 with x bands 
   and a Sample S2 with x+y bands the distances between the molecular weight of sample S1
   and the molecular weight of all possible subsets of S2 with x bands are computed.
   The distance between S1 and S2 is then defined as the minimum of all these distances.
+  
+  If \code{LOD} is specified, only all combinations of values below \code{LOD} are 
+  considered.
   
   This option may be useful, if gel image quality is low, and the detection of bands 
   is doubtful.
@@ -58,10 +67,13 @@ RFLPdist2(x, distfun = dist, nrBands, nrMissing,
 ## Euclidean distance
 data(RFLPdata)
 nrBands(RFLPdata)
-res0 <- RFLPdist2(RFLPdata, nrBands = 9, nrMissing = 0)
-res1 <- RFLPdist2(RFLPdata, nrBands = 9, nrMissing = 1)
-res2 <- RFLPdist2(RFLPdata, nrBands = 9, nrMissing = 2)
-res3 <- RFLPdist2(RFLPdata, nrBands = 9, nrMissing = 3)
+res0 <- RFLPdist(RFLPdata, nrBands = 4)
+res1 <- RFLPdist2(RFLPdata, nrBands = 4, nrMissing = 1)
+res2 <- RFLPdist2(RFLPdata, nrBands = 4, nrMissing = 2)
+res3 <- RFLPdist2(RFLPdata, nrBands = 4, nrMissing = 3)
+
+## assume missing bands only below LOD
+res1.lod <- RFLPdist2(RFLPdata, nrBands = 4, nrMissing = 1, LOD = 60)
 
 ## hierarchical clustering
 par(mfrow = c(2,2))
@@ -70,6 +82,11 @@ plot(hclust(res1), main = "1 band missing")
 plot(hclust(res2), main = "2 bands missing")
 plot(hclust(res3), main = "3 bands missing")
 
+## missing bands only below LOD
+par(mfrow = c(1,2))
+plot(hclust(res0), main = "0 bands missing")
+plot(hclust(res1.lod), main = "1 band missing below LOD")
+
 ## Similarity matrix
 library(MKmisc)
 myCol <- colorRampPalette(brewer.pal(8, "RdYlGn"))(128)
@@ -77,6 +94,12 @@ ord <- order.dendrogram(as.dendrogram(hclust(res1)))
 temp <- as.matrix(res1)
 simPlot(temp[ord,ord], col = rev(myCol), minVal = 0, 
         labels = colnames(temp), title = "(Dis-)Similarity Plot")
+
+## missing bands only below LOD
+ord <- order.dendrogram(as.dendrogram(hclust(res1.lod)))
+temp <- as.matrix(res1.lod)
+simPlot(temp[ord,ord], col = rev(myCol), minVal = 0, 
+        labels = colnames(temp), title = "(Dis-)Similarity Plot\n1 band missing below LOD")
 
 
 ## or
@@ -91,11 +114,14 @@ levelplot(temp[ord,ord], col.regions = rev(myCol),
 
 ## Other distances
 res11 <- RFLPdist2(RFLPdata, distfun = function(x) dist(x, method = "manhattan"),
-                 nrBands = 9, nrMissing = 1)
-res12 <- RFLPdist2(RFLPdata, distfun = corDist, nrBands = 9, nrMissing = 1)
-res1
-res11
-res12
+                 nrBands = 4, nrMissing = 1)
+res12 <- RFLPdist2(RFLPdata, distfun = corDist, nrBands = 4, nrMissing = 1)
+res13 <- RFLPdist2(RFLPdata, distfun = corDist, nrBands = 4, nrMissing = 1, LOD = 60)
+par(mfrow = c(2,2))
+plot(hclust(res1), main = "Euclidean distance\n1 band missing")
+plot(hclust(res11), main = "Manhattan distance\n1 band missing")
+plot(hclust(res12), main = "Pearson correlation distance\n1 band missing")
+plot(hclust(res13), main = "Pearson correlation distance\n1 band missing below LOD")
 }
 \keyword{multivariate}
 \keyword{cluster}

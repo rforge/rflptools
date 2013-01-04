@@ -15,7 +15,7 @@ Tools to analyse RFLP-data
 \tabular{ll}{
 Package: \tab RFLPtools\cr
 Version: \tab 1.5 \cr
-Date: \tab 2013-01-03 \cr
+Date: \tab 2013-01-04 \cr
 Depends: \tab R(>= 2.10.0), stats, utils, grDevices, RColorBrewer\cr
 Suggests: \tab lattice, MKmisc(>= 0.8)\cr
 License: \tab LGPL-3\cr

@@ -10,7 +10,8 @@
 \usage{
 RFLPrefplot(x, ref, distfun = dist, nrBands, mar.bottom = 5, 
             cex.main = 1.2, cex.axis = 0.5, devNew = FALSE, 
-            colBands)
+            colBands, xlab = "", ylab = "molecular weight", 
+            ylim, ...)
 }
 \arguments{
   \item{x}{ data.frame with RFLP data; e.g. \code{\link{RFLPdata}}.}
@@ -26,6 +27,12 @@ RFLPrefplot(x, ref, distfun = dist, nrBands, mar.bottom = 5,
   \item{colBands}{ color for the bands. Has to be of length 1 or number of samples. 
   If missing, \code{"Set1"} of \pkg{RColorBrewer} is used; see
   \code{\link[RColorBrewer]{brewer.pal}}. }
+  \item{xlab}{ passed to function \code{\link[graphics]{plot}}. }
+  \item{ylab}{ passed to function \code{\link[graphics]{plot}}. }
+  \item{ylim}{ passed to function \code{\link[graphics]{plot}}. If missing an appropriate
+  range of y-values is computed. }
+  \item{\dots}{ additional arguments passed to function \code{\link[graphics]{plot}}
+  except \code{xlim} which is defined inside of \code{RFLPplot}. }
 }
 \details{
   Given RFLP samples are plotted together with reference samples and
@@ -45,8 +52,8 @@ data(RFLPdata)
 data(RFLPref)
 dev.new(width = 12)
 RFLPrefplot(RFLPdata, RFLPref, nrBands = 4, cex.axis = 0.5)
-dev.off()
 
+dev.new()
 RFLPrefplot(RFLPdata, RFLPref, nrBands = 6, cex.axis = 0.8)
 RFLPrefplot(RFLPdata, RFLPref, nrBands = 9, cex.axis = 0.8)
 
@@ -59,8 +66,8 @@ RFLP2 <- RFLPqc(RFLP1)
 
 dev.new(width = 12)
 RFLPrefplot(RFLP1, RFLPref, nrBands = 4, cex.axis = 0.8)
-dev.off()
 
+dev.new()
 RFLPrefplot(RFLP1, RFLPref, nrBands = 5, cex.axis = 0.8)
 }
 \keyword{multivariate}

@@ -7,7 +7,8 @@
 RFLPplot <- function(x, nrBands, nrMissing, distfun = dist, 
 		     hclust.method = "complete", 
                      mar.bottom = 5, cex.axis = 0.5,
-		     colBands){
+		     colBands, xlab = "", ylab = "molecular weight", 
+		     ylim, ...){
     stopifnot(is.data.frame(x))
     stopifnot(is.function(distfun))
     
@@ -32,20 +33,23 @@ RFLPplot <- function(x, nrBands, nrMissing, distfun = dist,
     temp <- x1[ind]
     temp1 <- do.call("rbind", temp)
     
-    par(mar = c(mar.bottom, 4, 4, 2) + 0.1)
-    lo <- 10*trunc(min(temp1$MW)/10)
-    up <- 10*ceiling(max(temp1$MW)/10)
-    if(up-lo < 1) up <- up + 1
+    par(mar = c(mar.bottom, 4, 4, 2) + 0.1)    
+    if(missing(ylim)){
+        lo <- 10*trunc(min(temp1$MW)/10)
+        up <- 10*ceiling(max(temp1$MW)/10)
+        if(up-lo < 1) up <- up + 1
+        ylim <- c(lo, up)
+    }
     
-
-    plot(NA, NA, xlim = c(0.25,length(temp)+0.75), ylim = c(lo, up),
-         xlab = "", ylab = "molecular weight", axes = FALSE)
-    axis(1, at = 1:length(temp), labels = names(temp)[dend.ord], las = 2, cex.axis = cex.axis)
-        
-    At <- round(seq(lo, up, length = 11), 0)
+    plot(NA, NA, xlim = c(0.25,length(temp)+0.75), ylim = ylim,
+         xlab = xlab, ylab = ylab, axes = FALSE, ...)
+    At <- round(seq(ylim[1], ylim[2], length = 11), 0)
     axis(2, at = At, labels = as.character(At), las = 2)
+    axis(1, at = 1:length(temp), labels = names(temp)[dend.ord], las = 2, 
+         cex.axis = cex.axis)
     abline(h = At, col = "grey", lty = 2)
     box()
+    
     if(missing(nrMissing)){
         title(paste("Samples with", nrBands, "bands"))
     }else{

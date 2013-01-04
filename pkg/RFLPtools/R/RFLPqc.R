@@ -37,5 +37,5 @@ RFLPqc <- function(x, rm.band1 = TRUE, QC.lo = 0.8, QC.up = 1.07, QC.rm = FALSE)
     
     if(rm.band1 || QC.rm) rownames(x) <- 1:nrow(x)
     
-    return(x)
+    x
 }
