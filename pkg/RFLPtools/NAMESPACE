@@ -1,3 +1,4 @@
+import("RColorBrewer")
 export(diffDist,
        FragMatch,
        germ,
