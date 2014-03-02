@@ -14,15 +14,23 @@ nrBands <- function(x){
 ## diag: see ?dist
 ## upper: see ?dist
 ## compares samples with number of bands in: nrBands, nrBands + 1, ..., nrBands + nrMissing
-RFLPdist2 <- function(x, distfun = dist, nrBands, nrMissing, LOD, diag = FALSE, upper = FALSE){
+RFLPdist2 <- function(x, distfun = dist, nrBands, nrMissing, LOD = 0, diag = FALSE, upper = FALSE){
     stopifnot(is.data.frame(x))
     stopifnot(is.function(distfun))
     if(missing(nrMissing))
         stop("'nrMissing' is not specified!")
     if(nrMissing == 0)
         stop("'nrMissing == 0', please use function 'RFLPdist'!")
+    if(nrMissing <= 0)
+        stop("'nrMissing' has to be a positive interger!")    
+    if(missing(nrBands))
+        stop("'nrBands' is not specified!")
+    if(nrBands <= 0)
+        stop("'nrBands' has to be a positive interger!")
+    if(LOD < 0)
+        stop("'LOD' has to be non-negative!")
 
-    if(missing(LOD)){
+    if(LOD == 0){
         x1 <- split(x, x$Sample)
         x1.bands <- sapply(x1, nrow)
 

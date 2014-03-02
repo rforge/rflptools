@@ -39,7 +39,11 @@ diffDist(x, method = "euclidean", diag = FALSE, upper = FALSE, p = 2)
 \value{
   \code{diffDist} returns an object of class \code{"dist"}; cf. \code{\link[stats]{dist}}.
 }
-%\references{}
+\references{
+  Flessa, F., Kehl, A., Kohl, M.
+  Analysing diversity and community structures using PCR-RFLP: a new software application.
+  Molecular Ecology Resources 2013 Jul; 13(4):726-33. 
+}
 \author{ Matthias Kohl \email{Matthias.Kohl@stamats.de}}
 %\note{}
 \examples{

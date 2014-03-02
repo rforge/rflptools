@@ -28,7 +28,7 @@ RFLPplot(x, nrBands, nrMissing, distfun = dist,
   \item{cex.axis}{ size of the x-axis annotation. }
   \item{colBands}{ color for the bands. Has to be of length 1 or number of samples. 
   If missing, \code{"Set1"} of \pkg{RColorBrewer} is used; see
-  \code{\link[RColorBrewer]{brewer.pal}}. }
+  \code{\link[RColorBrewer]{ColorBrewer}}. }
   \item{xlab}{ passed to function \code{\link[graphics]{plot}}. }
   \item{ylab}{ passed to function \code{\link[graphics]{plot}}. }
   \item{ylim}{ passed to function \code{\link[graphics]{plot}}. If missing an appropriate
@@ -44,7 +44,11 @@ RFLPplot(x, nrBands, nrMissing, distfun = dist,
   and the detection of bands is doubtful.
 }
 \value{invisible}
-%\references{ ??? }
+\references{
+  Flessa, F., Kehl, A., Kohl, M.
+  Analysing diversity and community structures using PCR-RFLP: a new software application.
+  Molecular Ecology Resources 2013 Jul; 13(4):726-33. 
+}
 \author{ 
   Fabienne Flessa \email{Fabienne.Flessa@uni-bayreuth.de},\cr
   Alexandra Kehl \email{Alexandra.Kehl@botgarten.uni-tuebingen.de},\cr

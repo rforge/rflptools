@@ -3,6 +3,22 @@
 ###############################################################################
 
 ###########################################################
+## Version 1.6
+###########################################################
+- added reference Flessa et al. (2013) to man files.
+- added some further checks for function input.
+- functions RFLPdist and RFLPdist2ref obtained an argument LOD for handling 
+  values below some given limit of detection (LOD).
+- new example datasets refDataGerm and newDataGerm taken from the GERM
+  software
+- added function germ which represents an implementation of the Good-Enough 
+  RFLP Matcher (GERM) program.
+- added function FragMatch which represents an implementation of the FragMatch
+  program.
+- added function simulateRFLPdata to simulate RFLP data.
+
+
+###########################################################
 ## Version 1.5
 ###########################################################
 - update of vignette

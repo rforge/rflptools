@@ -13,7 +13,7 @@
   argument \code{nrMissing}.
 }
 \usage{
-RFLPdist2(x, distfun = dist, nrBands, nrMissing, LOD,
+RFLPdist2(x, distfun = dist, nrBands, nrMissing, LOD = 0,
           diag = FALSE, upper = FALSE)
 }
 \arguments{
@@ -32,7 +32,7 @@ RFLPdist2(x, distfun = dist, nrBands, nrMissing, LOD,
   all samples with number of bands in nrBands, nrBands+1, ..., nrBands+nrMissing
   are compared. 
 
-  If \code{LOD} is specified, it is assumed that missing bands can only occur for
+  If \code{LOD > 0} is specified, it is assumed that missing bands can only occur for
   molecular weights smaller than \code{LOD}. As a consequence only samples which 
   have \code{nrBands} bands with molecular weight larger or equal to \code{LOD} are
   selected.
@@ -42,7 +42,7 @@ RFLPdist2(x, distfun = dist, nrBands, nrMissing, LOD,
   and the molecular weight of all possible subsets of S2 with x bands are computed.
   The distance between S1 and S2 is then defined as the minimum of all these distances.
   
-  If \code{LOD} is specified, only all combinations of values below \code{LOD} are 
+  If \code{LOD > 0} is specified, only all combinations of values below \code{LOD} are 
   considered.
   
   This option may be useful, if gel image quality is low, and the detection of bands 
@@ -52,6 +52,10 @@ RFLPdist2(x, distfun = dist, nrBands, nrMissing, LOD,
   An object of class \code{"dist"} returned; cf. \code{\link[stats]{dist}}.
 }
 \references{
+  Flessa, F., Kehl, A., Kohl, M.
+  Analysing diversity and community structures using PCR-RFLP: a new software application.
+  Molecular Ecology Resources 2013 Jul; 13(4):726-33. 
+  
   Ian A. Dickie, Peter G. Avis, David J. McLaughlin, Peter B. Reich. 
   Good-Enough RFLP Matcher (GERM) program.
   Mycorrhiza 2003, 13:171-172.

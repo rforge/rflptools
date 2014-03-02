@@ -8,7 +8,7 @@
   the distance between the molecular weights is computed.
 }
 \usage{
-RFLPdist(x, distfun = dist, nrBands)
+RFLPdist(x, distfun = dist, nrBands, LOD = 0)
 }
 \arguments{
   \item{x}{ data.frame with RFLP data; see \code{\link{RFLPdata}}.}
@@ -16,6 +16,7 @@ RFLPdist(x, distfun = dist, nrBands)
   cf. \code{\link[stats]{dist}}.}
   \item{nrBands}{ if not missing, then only samples with the specified number
   of bands are considered. }
+  \item{LOD}{ threshold for low-bp bands. }
 }
 \details{
   For each number of bands the given distance between the molecular weights is computed. 
@@ -23,6 +24,9 @@ RFLPdist(x, distfun = dist, nrBands)
   bands which occur in each group.
   
   If \code{nrBands} is specified only samples with this number of bands are considered.
+  
+  If \code{LOD > 0} is specified, all values below \code{LOD} are removed before the 
+  distances are calculated.
 }
 \value{
   A named list with the distances; see \code{\link[stats]{dist}}.
@@ -30,6 +34,10 @@ RFLPdist(x, distfun = dist, nrBands)
   In case \code{nrBands} is not missing, an object of S3 class \code{dist}.
 }
 \references{
+  Flessa, F., Kehl, A., Kohl, M.
+  Analysing diversity and community structures using PCR-RFLP: a new software application.
+  Molecular Ecology Resources 2013 Jul; 13(4):726-33. 
+  
   Poussier, Stephane; Trigalet-Demery, Danielle; Vandewalle, Peggy; Goffinet, Bruno; Luisetti, Jacques; Trigalet, Andre.
   Genetic diversity of Ralstonia solanacearum as assessed by PCR-RFLP of the hrp gene region, AFLP and 16S rRNA sequence 
   analysis, and identification of an African subdivision.

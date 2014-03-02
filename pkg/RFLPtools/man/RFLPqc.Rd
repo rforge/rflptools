@@ -46,7 +46,11 @@ RFLPqc(x, rm.band1 = TRUE, QC.lo = 0.8, QC.up = 1.07, QC.rm = FALSE)
     \item{\code{Gel}}{character: gel identifier. }
   }
 }
-%\references{ ??? }
+\references{
+  Flessa, F., Kehl, A., Kohl, M.
+  Analysing diversity and community structures using PCR-RFLP: a new software application.
+  Molecular Ecology Resources 2013 Jul; 13(4):726-33. 
+}
 \author{ 
   Fabienne Flessa \email{Fabienne.Flessa@uni-bayreuth.de},\cr
   Alexandra Kehl \email{Alexandra.Kehl@botgarten.uni-tuebingen.de},\cr

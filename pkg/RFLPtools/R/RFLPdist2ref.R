@@ -5,13 +5,19 @@
 ## x: data.frame with RFLP data
 ## ref: data.frame with RFLP reference data
 ## distfun: function to compute distance (cf. ?dist)
-RFLPdist2ref <- function(x, ref, distfun = dist, nrBands){
+RFLPdist2ref <- function(x, ref, distfun = dist, nrBands, LOD = 0){
     stopifnot(is.data.frame(x))
     stopifnot(is.data.frame(ref))
     stopifnot(is.function(distfun))
     
     if(missing(nrBands))
         stop("Number of Bands 'nrBands' is missing.")
+    if(nrBands <= 0)
+        stop("'nrBands' has to be a positive interger!")
+    if(LOD > 0){
+        x <- x[x$MW >= LOD,]
+        ref <- ref[ref$MW >= LOD,]
+    }
         
     x1 <- split(x, x$Sample)
     ref1 <- split(ref, ref$Sample)

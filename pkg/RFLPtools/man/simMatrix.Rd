@@ -42,7 +42,11 @@ simMatrix(x, sequence.range = FALSE, Min, Max)
 
   Persoh, D., Melcher, M., Flessa, F., Rambold, G.: 
   First fungal community analyses of endophytic ascomycetes associated with Viscum album ssp. austriacum 
-  and itshost Pinus sylvestris. Fungal Biology 2010, in press.
+  and itshost Pinus sylvestris. Fungal Biology 2010 Jul;114(7):585-96.
+  
+  Flessa, F., Kehl, A., Kohl, M.
+  Analysing diversity and community structures using PCR-RFLP: a new software application.
+  Molecular Ecology Resources 2013 Jul; 13(4):726-33. 
 }
 \author{ 
   Fabienne Flessa \email{Fabienne.Flessa@uni-bayreuth.de},\cr

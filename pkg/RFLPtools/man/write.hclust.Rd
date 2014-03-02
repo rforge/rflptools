@@ -32,7 +32,11 @@ write.hclust(x, file, prefix, h = NULL, k = NULL, append = FALSE, dec = ",")
   where the columns in the resulting file are seperated by tabulators 
   (i.e. \code{sep="\t"}) and no row names are exported (i.e. \code{row.names = FALSE}).
 }
-%\references{ ??? }
+\references{
+  Flessa, F., Kehl, A., Kohl, M.
+  Analysing diversity and community structures using PCR-RFLP: a new software application.
+  Molecular Ecology Resources 2013 Jul; 13(4):726-33. 
+}
 \author{ 
   Fabienne Flessa \email{Fabienne.Flessa@uni-bayreuth.de},\cr
   Alexandra Kehl \email{Alexandra.Kehl@botgarten.uni-tuebingen.de},\cr

@@ -19,7 +19,11 @@ nrBands(x)
   number of bands.
 }
 \value{ Number of bands per RFLP-samples. }
-%\references{ ??? }
+\references{
+  Flessa, F., Kehl, A., Kohl, M.
+  Analysing diversity and community structures using PCR-RFLP: a new software application.
+  Molecular Ecology Resources 2013 Jul; 13(4):726-33. 
+}
 \author{ 
   Fabienne Flessa \email{Fabienne.Flessa@uni-bayreuth.de},\cr
   Alexandra Kehl \email{Alexandra.Kehl@botgarten.uni-tuebingen.de},\cr

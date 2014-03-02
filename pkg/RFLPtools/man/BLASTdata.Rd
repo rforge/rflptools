@@ -41,6 +41,10 @@
   Blast News: http://blast.ncbi.nlm.nih.gov/Blast.cgi?CMD=Web&PAGE_TYPE=BlastNews
   
   BioEdit v7.0.9: Tom Hall, Ibis Biosciences; http://www.mbio.ncsu.edu/BioEdit/bioedit.html
+  
+  Flessa, F., Kehl, A., Kohl, M.
+  Analysing diversity and community structures using PCR-RFLP: a new software application.
+  Molecular Ecology Resources 2013 Jul; 13(4):726-33. 
 }
 \examples{
 data(BLASTdata)
