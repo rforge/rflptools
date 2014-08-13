@@ -39,7 +39,7 @@ FragMatch(newData, refData, maxValue = 1000, errorBound = 25,
   Mycorrhiza 2007, 17:133-136
 }
 \author{ 
-  Matthias Kohl \email{Matthias.Kohl@stamats.de} 
+  Mohammed Aslam Imtiaz, Matthias Kohl \email{Matthias.Kohl@stamats.de} 
 }
 %\note{}
 \seealso{ \code{\link{newDataGerm}}, \code{\link{refDataGerm}} }

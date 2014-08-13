@@ -42,7 +42,7 @@ pagecolor=darkblue,raiselinks,plainpages,pdftex]{hyperref}
 University of Bayreuth, 95440 Bayreuth, Germany, Fabienne.Flessa@uni-bayreuth.de}, 
 A. Kehl\thanks{Botanical Garden, University of Tübingen, Hartmeyerstr.\ 123, 72076 Tübingen, 
 Germany, Alexandra.Kehl@botgarten.uni-tuebingen.de} and 
-M. Kohl\thanks{Department of Mechanical and Process Engineering, 
+M. Kohl\thanks{Department of Medical and Life Sciences, 
 Furtwangen University, 78054 VS-Schwenningen, Germany, Matthias.Kohl@stamats.de}\\ \\
 \includegraphics[width = 3cm]{logoUBT.png}
 \includegraphics[width = 3cm]{logoTueb.png}
@@ -59,7 +59,9 @@ The package \pkg{RFLPtools} aims at
 sizes (i.e. derived from RFLP-analysis)
 \item the analysis of standalone BLAST report files (i.e. DNA sequence analysis)
 \end{itemize}
-In this short vignette we describe and demonstrate the available functions.
+see also \cite{Flessa13}.
+In this short vignette we describe and demonstrate the available functions. We
+start with loading the package.
 <<load>>=
 library(RFLPtools)
 @
@@ -309,6 +311,16 @@ plot(hclust(res.d), cex = 0.7)
 %-------------------------------------------------------------------------------
 \begin{thebibliography}{1}
 
+  \bibitem{Flessa13}
+  Flessa, Fabienne; Kehl, Alexandra; Kohl, Matthias.  
+  \newblock Analysing diversity and community structures using PCR-RFLP: a new software application".
+  \newblock Molecular Ecology Resources 2013 Jul; 13(4):726-33. 
+  
+  \bibitem{Matsumoto96}
+  Matsumoto, Masaru; Furuya, Naruto; Takanami, Yoichi; Matsuyama, Nobuaki.  
+  \newblock RFLP analysis of the PCR-amplified 28S rDNA in Rhizoctonia solani. 
+  \newblock Mycoscience 1996 37:351 - 356
+
   \bibitem{Poussier00}
   Poussier, Stephane; Trigalet-Demery, Danielle; Vandewalle, Peggy; Goffinet, Bruno; 
   Luisetti, Jacques; Trigalet, Andre.
@@ -317,11 +329,6 @@ plot(hclust(res.d), cex = 0.7)
   an African subdivision.
   \newblock Microbiology 2000 146:1679-1692 
   
-  \bibitem{Matsumoto96}
-  Matsumoto, Masaru; Furuya, Naruto; Takanami, Yoichi; Matsuyama, Nobuaki.  
-  \newblock RFLP analysis of the PCR-amplified 28S rDNA in Rhizoctonia solani. 
-  \newblock Mycoscience 1996 37:351 - 356
-
 \end{thebibliography}
 %-------------------------------------------------------------------------------
 \end{document}

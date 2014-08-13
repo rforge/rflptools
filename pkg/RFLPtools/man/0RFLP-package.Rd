@@ -15,8 +15,8 @@ Tools to analyse RFLP-data
 \tabular{ll}{
 Package: \tab RFLPtools\cr
 Version: \tab 1.6 \cr
-Date: \tab 2014-03-02 \cr
-Depends: \tab R(>= 3.0.0), stats, utils, grDevices, RColorBrewer\cr
+Date: \tab 2014-08-13 \cr
+Depends: \tab R(>= 3.0.0), stats, utils, graphics, grDevices, RColorBrewer\cr
 Suggests: \tab lattice, MKmisc(>= 0.8)\cr
 License: \tab LGPL-3\cr
 }}
@@ -25,6 +25,7 @@ License: \tab LGPL-3\cr
 \author{
   Fabienne Flessa \email{Fabienne.Flessa@uni-bayreuth.de},\cr
   Alexandra Kehl \email{Alexandra.Kehl@botgarten.uni-tuebingen.de},\cr
+  Mohammed Aslam Imtiaz,\cr
   Matthias Kohl \email{Matthias.Kohl@stamats.de}\cr
 
 \emph{Maintainer:} Matthias Kohl \email{Matthias.Kohl@stamats.de}

@@ -43,7 +43,7 @@ simulateRFLPdata(N = 10, nrBands = 3:12, bandCenters = seq(100, 800, by = 100),
 }
 %\references{}
 \author{ 
-  Matthias Kohl \email{Matthias.Kohl@stamats.de} 
+  Mohammed Aslam Imtiaz, Matthias Kohl \email{Matthias.Kohl@stamats.de} 
 }
 %\note{}
 \seealso{ \code{\link{RFLPdata}}, \code{\link{RFLPref}} }

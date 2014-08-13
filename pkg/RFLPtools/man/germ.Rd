@@ -39,7 +39,7 @@ germ(newData, refData, parameters = list("Max forward error" = 25,
   Mycorrhiza 2003, 13:171-172.
 }
 \author{ 
-  Matthias Kohl \email{Matthias.Kohl@stamats.de} 
+  Mohammed Aslam Imtiaz, Matthias Kohl \email{Matthias.Kohl@stamats.de} 
 }
 %\note{}
 \seealso{ \code{\link{newDataGerm}}, \code{\link{refDataGerm}} }
